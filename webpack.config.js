@@ -4,6 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval',
   entry: [
+    'whatwg-fetch',
     'webpack-dev-server/client?http://0.0.0.0:4000', // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './src/index' // Your appʼs entry point
