@@ -3,6 +3,6 @@ import React from 'react';
 import App from './App.js';
 
 ReactDOM.render(
-  <App apiEndpoint="http://localhost:3000/api"/>,
+  <App />,
   document.getElementById('app')
 );
