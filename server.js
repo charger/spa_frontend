@@ -12,4 +12,5 @@ new WebpackDevServer(webpack(config), {
   }
 
   console.log('Listening at http://localhost:4000/');
+  console.log(config.output.publicPath);
 });

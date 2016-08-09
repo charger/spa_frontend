@@ -9,14 +9,14 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch(this.props.apiEndpoint + '/posts')
+    fetch(process.env.API_ENDPOINT + '/posts')
       .then((response) => this._parseJson(response))
       .then((json) => {this.setState({posts: json})})
       .catch((ex) => { console.log('parsing failed', ex)});
   }
 
   _handlePostSubmit(params){
-    fetch(this.props.apiEndpoint + '/posts', {
+    fetch(process.env.API_ENDPOINT + '/posts', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

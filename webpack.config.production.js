@@ -3,32 +3,22 @@ var webpack = require('webpack');
 path = require('path');
 
 module.exports = {
-  devtool: 'eval',
   entry: [
-    'whatwg-fetch',
-    'webpack-dev-server/client?http://0.0.0.0:4000', // WebpackDevServer host and port
-    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-    './src/index' // Your appʼs entry point
+    './src/index'
   ],
   output: {
     path: __dirname + '/public/assets',
     filename: 'index.js',
-    publicPath: './public'
+    publicPath: '/assets/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development'),
-        'API_ENDPOINT': JSON.stringify('http://localhost:3000/api')
+        'NODE_ENV': JSON.stringify('production'),
+        'API_ENDPOINT': JSON.stringify('http://ec2-107-23-7-96.compute-1.amazonaws.com/api')
       }
     })
   ],
-  devServer: {
-    contentBase: './public',
-    hot: true,
-    port: 4000
-  },
   module: {
     preLoaders: [
       { test: /\.jsx?$/, loader: 'eslint', exclude: /node_modules/ }
