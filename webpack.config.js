@@ -11,9 +11,9 @@ module.exports = {
     './src/index' // Your appʼs entry point
   ],
   output: {
-    path: __dirname + '/public/assets',
+    path: path.join(__dirname, 'public', 'assets'),
     filename: 'index.js',
-    publicPath: './public'
+    publicPath: '/assets/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -25,8 +25,11 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: './public',
+    publicPath: '/assets/',
+    contentBase: path.join(__dirname, 'public'),
     hot: true,
+    historyApiFallback: true,
+    noInfo: true,
     port: 4000
   },
   module: {

@@ -3,7 +3,7 @@
   "description": "Frontend application",
   "version": "0.0.1",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dev-server",
     "build": "webpack --progress --config webpack.config.production.js",
     "deploy": "npm run build ; aws s3 cp public s3://spa.front --recursive",
     "lint": "eslint src",
