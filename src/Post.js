@@ -3,11 +3,11 @@ import React from 'react';
 class Post extends React.Component {
   render(){
     return (
-      <div key={this.id}>
-        {this.props.name}
+      <li key={this.id} className="list-group-item">
+        <strong>{this.props.name}</strong>
         <br/>
         {this.props.description}
-      </div>
+      </li>
     );
   }
 }

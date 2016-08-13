@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post.js';
 import PostForm from './PostForm.js';
+import * as PostActions from './actions/PostActions.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -24,13 +25,25 @@ class App extends React.Component {
       },
       body: JSON.stringify(params)
     })
+      .then(this._handleErrors)
       .then((response) => this._parseJson(response))
       .then((json) => {this.setState({posts: this.state.posts.concat(json)})})
       .catch((ex) => { console.log('parsing failed', ex)});
   }
 
+  _handleErrors(response){
+    if (!response.ok) {
+      throw Error(response);
+    }
+    return response;
+  }
+
   _parseJson(data){
     return data.json();
+  }
+
+  _handleTestClick(){
+    this.props.store.dispatch( PostActions.add() )
   }
 
   render() {
@@ -43,8 +56,22 @@ class App extends React.Component {
 
     return(
       <div>
-        {postNodes}
-        <PostForm onPostSubmit={this._handlePostSubmit.bind(this)}/>
+        <div className="row">
+          <div className="col-sm-12">
+            <h2>Posts</h2>
+            <ul className="list-group">
+              {postNodes}
+            </ul>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-sm-12">
+            <PostForm onPostSubmit={this._handlePostSubmit.bind(this)}/>
+          </div>
+        </div>
+
+            <input type="button" onClick={this._handleTestClick.bind(this)} value="Test" />
       </div>
     );
   }

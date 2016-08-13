@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --progress --config webpack.config.production.js",
+    "build": "NODE_ENV='production' webpack --progress",
     "deploy": "npm run build ; aws s3 cp public s3://spa.front --recursive",
     "lint": "eslint src",
     "test": "eslint src"
@@ -23,6 +23,7 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "react-hot-loader": "^1.3.0",
+    "path": "^0.12.7",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
@@ -30,12 +31,14 @@
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
+    "css-loader": "^0.23.1",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
+    "style-loader": "^0.13.1",
     "whatwg-fetch": "^1.0.0"
   },
   "babel": {
