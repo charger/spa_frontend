@@ -1,7 +1,6 @@
 import React from 'react';
 import Post from './Post.js';
 import PostForm from './PostForm.js';
-import * as PostActions from './actions/PostActions.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -42,10 +41,6 @@ class App extends React.Component {
     return data.json();
   }
 
-  _handleTestClick(){
-    this.props.store.dispatch( PostActions.add() )
-  }
-
   render() {
     let posts = this.state.posts;
     let postNodes = posts.map(function(post) {
@@ -71,7 +66,7 @@ class App extends React.Component {
           </div>
         </div>
 
-            <input type="button" onClick={this._handleTestClick.bind(this)} value="Test" />
+            <input type="button" onClick={this.props.onTestClick} value="Test" />
       </div>
     );
   }
