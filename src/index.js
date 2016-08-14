@@ -5,20 +5,17 @@ import React from 'react';
 import App from './App.js';
 import configureStore from './store/configureStore.js'
 import { Provider, connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import * as PostActions from './actions/PostActions.js'
 
 const store = configureStore();
 
-function mapStateToProps(state) {
-  return {
-    value: state.count
-  }
-}
+const mapStateToProps = (state) => {
+  return state
+};
 
 function mapDispatchToProps(dispatch) {
-  return {
-    onTestClick: () => { dispatch(PostActions.add()); }
-  }
+  return bindActionCreators(PostActions, dispatch)
 }
 
 // Connected Component

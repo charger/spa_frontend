@@ -66,7 +66,7 @@ class App extends React.Component {
           </div>
         </div>
 
-            <input type="button" onClick={this.props.onTestClick} value="Test" />
+            <input type="button" onClick={this.props.add} value="Test" />
       </div>
     );
   }
