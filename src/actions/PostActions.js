@@ -58,10 +58,6 @@ export function addPost(title, body) {
   }
 }
 export function removePost(id) {
-  if (!confirm('Are you sure?')) {
-    return dispatch => {}
-  }
-
   return dispatch => {
     fetch(process.env.API_ENDPOINT + '/posts/' + id, {
       method: 'DELETE',

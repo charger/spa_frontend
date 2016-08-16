@@ -8,11 +8,19 @@ class App extends React.Component {
     this.props.getPosts();
   }
 
+  _handleRemove(id){
+    if (!confirm('Are you sure?')) {
+      return
+    }
+    console.log(this.props);
+    this.props.removePost(id);
+  }
+
   render() {
     let posts = this.props.posts.items;
     let postNodes = posts.map((post) => {
       return (
-        <Post key={post.id} id={post.id} name={post.title} description={post.body} onDelete={this.props.removePost.bind(self, post.id)} />
+        <Post key={post.id} id={post.id} name={post.title} description={post.body} onRemove={this._handleRemove.bind(this, post.id)} />
       );
     });
 
