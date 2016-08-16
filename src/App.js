@@ -10,10 +10,9 @@ class App extends React.Component {
 
   render() {
     let posts = this.props.posts.items;
-    let self = this;
-    let postNodes = posts.map(function(post) {
+    let postNodes = posts.map((post) => {
       return (
-        <Post key={post.id} id={post.id} name={post.title} description={post.body} onDelete={self.props.removePost.bind(self, post.id)} />
+        <Post key={post.id} id={post.id} name={post.title} description={post.body} onDelete={this.props.removePost.bind(self, post.id)} />
       );
     });
 
