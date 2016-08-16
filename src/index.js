@@ -11,7 +11,7 @@ import * as PostActions from './actions/PostActions.js'
 const store = configureStore();
 
 const mapStateToProps = (state) => {
-  return state
+  return { posts: state.posts }
 };
 
 function mapDispatchToProps(dispatch) {

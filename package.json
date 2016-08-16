@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "NODE_ENV='production' webpack --progress",
+    "build": "NODE_ENV='production' webpack --progress --config webpack.config.prod.js",
     "deploy": "npm run build ; aws s3 cp public s3://spa.front --recursive",
     "lint": "eslint src",
     "test": "eslint src"
