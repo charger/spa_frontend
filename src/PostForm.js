@@ -5,7 +5,7 @@ class PostForm extends React.Component {
     e.preventDefault();
     let title = this.refs.title.value;
     let body = this.refs.body.value;
-    this.props.onPostSubmit({title, body});
+    this.props.onPostSubmit(title, body);
   }
 
   render() {
@@ -38,8 +38,6 @@ class PostForm extends React.Component {
               <input type="submit" value="Post" className="btn btn-primary" />
             </div>
           </div>
-
-
         </form>
       </div>
     );

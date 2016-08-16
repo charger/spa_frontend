@@ -3,49 +3,17 @@ import Post from './Post.js';
 import PostForm from './PostForm.js';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { posts: [] };
-  }
 
   componentDidMount(){
-    fetch(process.env.API_ENDPOINT + '/posts')
-      .then((response) => this._parseJson(response))
-      .then((json) => {this.setState({posts: json})})
-      .catch((ex) => { console.log('parsing failed', ex)});
-  }
-
-  _handlePostSubmit(params){
-    fetch(process.env.API_ENDPOINT + '/posts', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
-    })
-      .then(this._handleErrors)
-      .then((response) => this._parseJson(response))
-      .then((json) => {this.setState({posts: this.state.posts.concat(json)})})
-      .catch((ex) => { console.log('parsing failed', ex)});
-  }
-
-  _handleErrors(response){
-    if (!response.ok) {
-      throw Error(response);
-    }
-    return response;
-  }
-
-  _parseJson(data){
-    return data.json();
+    this.props.getPosts();
   }
 
   render() {
-    let posts = this.state.posts;
+    let posts = this.props.posts.items;
+    let self = this;
     let postNodes = posts.map(function(post) {
       return (
-        <Post key={post.id} id={post.id} name={post.title} description={post.body} />
+        <Post key={post.id} id={post.id} name={post.title} description={post.body} onDelete={self.props.removePost.bind(self, post.id)} />
       );
     });
 
@@ -62,11 +30,9 @@ class App extends React.Component {
 
         <div className="row">
           <div className="col-sm-12">
-            <PostForm onPostSubmit={this._handlePostSubmit.bind(this)}/>
+            <PostForm onPostSubmit={this.props.addPost}/>
           </div>
         </div>
-
-            <input type="button" onClick={this.props.add} value="Test" />
       </div>
     );
   }
