@@ -59,7 +59,7 @@ export function addPost(title, body) {
 }
 export function removePost(id) {
   if (!confirm('Are you sure?')) {
-    return
+    return dispatch => {}
   }
 
   return dispatch => {
