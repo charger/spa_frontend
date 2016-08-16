@@ -24,9 +24,17 @@ class App extends React.Component {
       },
       body: JSON.stringify(params)
     })
+      .then(this._handleErrors)
       .then((response) => this._parseJson(response))
       .then((json) => {this.setState({posts: this.state.posts.concat(json)})})
       .catch((ex) => { console.log('parsing failed', ex)});
+  }
+
+  _handleErrors(response){
+    if (!response.ok) {
+      throw Error(response);
+    }
+    return response;
   }
 
   _parseJson(data){
@@ -43,8 +51,22 @@ class App extends React.Component {
 
     return(
       <div>
-        {postNodes}
-        <PostForm onPostSubmit={this._handlePostSubmit.bind(this)}/>
+        <div className="row">
+          <div className="col-sm-12">
+            <h2>Posts</h2>
+            <ul className="list-group">
+              {postNodes}
+            </ul>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-sm-12">
+            <PostForm onPostSubmit={this._handlePostSubmit.bind(this)}/>
+          </div>
+        </div>
+
+            <input type="button" onClick={this.props.add} value="Test" />
       </div>
     );
   }
