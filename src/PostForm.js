@@ -5,6 +5,7 @@ class PostForm extends React.Component {
     e.preventDefault();
     let title = this.refs.title.value;
     let body = this.refs.body.value;
+    if (title === '' || body === '') return;
     this.props.onPostSubmit(title, body);
   }
 
