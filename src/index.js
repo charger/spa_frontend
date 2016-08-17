@@ -2,31 +2,18 @@ import './css/main.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './App.js';
 import configureStore from './store/configureStore.js'
-import { Provider, connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as PostActions from './actions/PostActions.js'
+import { browserHistory } from 'react-router'
+import Root from './containers/Root'
+import syncHistoryWithStore from 'react-router-redux'
+
 
 const store = configureStore();
-
-const mapStateToProps = (state) => {
-  return { posts: state.posts }
-};
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(PostActions, dispatch)
-}
-
-// Connected Component
-const AppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+// const history = syncHistoryWithStore(browserHistory, store);
+console.log(process.env.NODE_ENV);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <Root store={store} history={browserHistory} />,
   document.getElementById('app')
 );
+

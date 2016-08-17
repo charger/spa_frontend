@@ -36,7 +36,7 @@ export function getPosts() {
       .then(_handleErrors)
       .then((response) => response.json() )
       .then((json) => { dispatch( postsReceived(json) ) })
-      .catch((ex) => { console.log('request failed', ex)});
+      // .catch((ex) => { console.log('request failed', ex)});
   }
 }
 

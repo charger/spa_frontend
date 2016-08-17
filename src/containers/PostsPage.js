@@ -1,9 +1,11 @@
 import React from 'react';
-import Post from './Post.js';
-import PostForm from './PostForm.js';
+import Post from '../components/Post.js';
+import PostForm from '../components/PostForm.js';
+import * as PostActions from '../actions/PostActions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-class App extends React.Component {
-
+class PostsPage extends React.Component {
   componentDidMount(){
     this.props.getPosts();
   }
@@ -12,7 +14,6 @@ class App extends React.Component {
     if (!confirm('Are you sure?')) {
       return
     }
-    console.log(this.props);
     this.props.removePost(id);
   }
 
@@ -45,4 +46,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { posts: state.posts }
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(PostActions, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostsPage);

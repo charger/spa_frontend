@@ -1,11 +1,14 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 class Post extends React.Component {
   render(){
     return (
       <li key={this.id} className="list-group-item">
         <button type="button" className="pull-sm-right btn btn-danger btn-sm" onClick={this.props.onRemove}>Delete</button>
-        <strong>{this.props.name}</strong>
+        <strong>
+          <Link to={`/posts/${this.props.id}`}>{this.props.name}</Link>
+        </strong>
         <br/>
         {this.props.description}
       </li>
