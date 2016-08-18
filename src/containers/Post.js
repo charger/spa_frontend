@@ -5,7 +5,7 @@ import * as PostActions from '../actions/PostActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class PostList extends React.Component {
+class PostContainer extends React.Component {
   componentDidMount(){
     const id = this.props.params.id;
     this.props.getPost(id);
@@ -35,4 +35,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostList);
+)(PostContainer);
