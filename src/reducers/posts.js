@@ -6,7 +6,8 @@ export default function posts(state = { items: [] }, action) {
       return Object.assign({}, state, { items: action.items });
 
     case POST_ADD: {
-      const newItems = state.items.concat(action.item);
+      const id = action.item.id;
+      const newItems = state.items.filter((i) => i.id !== id ).concat(action.item);
       return Object.assign({}, state, {items: newItems});
     }
 

@@ -36,7 +36,23 @@ export function getPosts() {
       .then(_handleErrors)
       .then((response) => response.json() )
       .then((json) => { dispatch( postsReceived(json) ) })
-      .catch((ex) => { console.log('request failed', ex)});
+      // .catch((ex) => { console.log('request failed', ex)});
+  }
+}
+
+export function getPost(id) {
+  return dispatch => {
+    fetch(process.env.API_ENDPOINT + '/posts/' + id, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(_handleErrors)
+      .then((response) => response.json() )
+      .then((json) => { dispatch( postAdded(json) ) })
+      // .catch((ex) => { console.log('request failed', ex)});
   }
 }
 
