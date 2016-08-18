@@ -1,12 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router';
 import NotFoundPage from '../components/NotFoundPage';
-import PostDetails from '../components/PostDetails';
+import Post from '../components/Post';
 import * as PostActions from '../actions/PostActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class PostPage extends React.Component {
+class PostList extends React.Component {
   componentDidMount(){
     const id = this.props.params.id;
     this.props.getPost(id);
@@ -21,7 +20,7 @@ class PostPage extends React.Component {
   render() {
     const post = this._findPost();
     if (!post) return <NotFoundPage/>;
-    return <PostDetails item={post} />;
+    return <Post item={post} />;
   }
 }
 
@@ -36,4 +35,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostPage);
+)(PostList);

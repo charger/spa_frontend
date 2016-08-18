@@ -1,6 +1,4 @@
 import React from 'react';
-import Post from './PostRow.js';
-import PostForm from './PostForm.js';
 import {Link} from 'react-router';
 
 class NotFoundPage extends React.Component {

@@ -1,8 +1,8 @@
 import React from 'react';
-import PostRow from '../components/PostRow.js';
 import PostForm from '../components/PostForm.js';
+import {Link} from 'react-router';
 
-class PostsPage extends React.Component {
+class PostList extends React.Component {
   componentDidMount(){
     this.props.getPosts();
   }
@@ -18,7 +18,14 @@ class PostsPage extends React.Component {
     let posts = this.props.posts.items;
     let postNodes = posts.map((post) => {
       return (
-        <PostRow key={post.id} id={post.id} name={post.title} description={post.body} onRemove={this._handleRemove.bind(this, post.id)} />
+        <li key={post.id} className="list-group-item">
+          <button type="button" className="pull-sm-right btn btn-danger btn-sm" onClick={this._handleRemove.bind(this, post.id)}>Delete</button>
+          <strong>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          </strong>
+          <br/>
+          {post.body}
+        </li>
       );
     });
 
@@ -43,4 +50,4 @@ class PostsPage extends React.Component {
   }
 }
 
-export default PostsPage;
+export default PostList;

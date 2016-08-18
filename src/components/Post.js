@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-class PostDetails extends React.Component {
+class Post extends React.Component {
   render() {
     const post = this.props.item;
 
@@ -22,8 +22,8 @@ class PostDetails extends React.Component {
   }
 }
 
-PostDetails.propTypes = {
+Post.propTypes = {
   item: React.PropTypes.object.isRequired,
 };
 
-export default PostDetails;
+export default Post;

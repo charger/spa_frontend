@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router'
 import App from './components/App.js';
 import PostPage from './containers/PostPage'
-import PostsPage from './containers/PostsPage'
+import PostsPage from './containers/PostList'
 import NotFoundPage from './components/NotFoundPage'
 
 export default (
