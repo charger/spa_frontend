@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-class Post extends React.Component {
+class PostRow extends React.Component {
   render(){
     return (
       <li key={this.id} className="list-group-item">
@@ -16,11 +16,11 @@ class Post extends React.Component {
   }
 }
 
-Post.propTypes = {
+PostRow.propTypes = {
   onRemove: React.PropTypes.func.isRequired,
   id: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   description: React.PropTypes.string
 };
 
-export default Post;
+export default PostRow;

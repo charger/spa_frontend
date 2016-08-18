@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './Post.js';
+import Post from './PostRow.js';
 import PostForm from './PostForm.js';
 import {Link} from 'react-router';
 

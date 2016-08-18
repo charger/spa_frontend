@@ -10,7 +10,6 @@ import syncHistoryWithStore from 'react-router-redux'
 
 const store = configureStore();
 // const history = syncHistoryWithStore(browserHistory, store);
-console.log(process.env.NODE_ENV);
 
 ReactDOM.render(
   <Root store={store} history={browserHistory} />,

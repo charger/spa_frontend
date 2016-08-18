@@ -40,6 +40,22 @@ export function getPosts() {
   }
 }
 
+export function getPost(id) {
+  return dispatch => {
+    fetch(process.env.API_ENDPOINT + '/posts/' + id, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(_handleErrors)
+      .then((response) => response.json() )
+      .then((json) => { dispatch( postAdded(json) ) })
+      // .catch((ex) => { console.log('request failed', ex)});
+  }
+}
+
 export function addPost(title, body) {
   return dispatch => {
     const params = { title, body };
