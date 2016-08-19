@@ -5,14 +5,13 @@ import React from 'react';
 import configureStore from './store/configureStore.js'
 import { browserHistory } from 'react-router'
 import Root from './containers/Root'
-import syncHistoryWithStore from 'react-router-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
 
-
-const store = configureStore();
-// const history = syncHistoryWithStore(browserHistory, store);
+const store = configureStore(browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <Root store={store} history={browserHistory} />,
+  <Root store={store} history={history} />,
   document.getElementById('app')
 );
 
