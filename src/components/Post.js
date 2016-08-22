@@ -12,6 +12,9 @@ class Post extends React.Component {
             <h2>{post.title}</h2>
             {post.body}
 
+            <div>
+              <img src={post.image.url} width="200px"/>
+            </div>
             <div className="m-t-3">
               <Link to="/posts">Back</Link>
             </div>

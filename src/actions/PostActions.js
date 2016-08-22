@@ -1,19 +1,30 @@
+import queryString from 'query-string';
+
 export const POST_ADD = 'POST_ADD';
 export const POST_REMOVE = 'POST_REMOVE';
 export const POSTS_GET = 'POSTS_GET';
-import {logoutUser} from './AuthActions'
+export const POST_OPTIONS = 'POST_OPTIONS';
 
 export function postAdded(post) {
   return {
     type: POST_ADD,
-    item: { id: post.id, title: post.title, body: post.body }
+    item: { id: post.id, title: post.title, body: post.body, image: post.image }
+  }
+}
+
+export function setPostOptions(params) {
+  return {
+    type: POST_OPTIONS,
+    params: params
   }
 }
 
 export function postsReceived(posts) {
   return {
     type: POSTS_GET,
-    items: posts
+    items: posts.items,
+    page: posts.pagination.page,
+    total_pages: posts.pagination.total_pages,
   }
 }
 
@@ -34,10 +45,19 @@ function headers(){
 }
 
 export function getPosts() {
-  return dispatch => {
-    let token = localStorage.getItem('token') || null;
+  return (dispatch, getState) => {
+    const state = getState()['posts'];
+    let params = {
+      filter: state.filter,
+      order: state.order,
+      order_direction: state.order_direction,
+      page: state.page
+    };
 
-    fetch(process.env.API_ENDPOINT + '/posts', {
+    let token = localStorage.getItem('token') || null;
+    const query = queryString.stringify(params);
+
+    fetch(process.env.API_ENDPOINT + '/posts?' + query, {
       method: 'GET',
       headers: headers()
     })
@@ -61,18 +81,23 @@ export function getPost(id) {
   }
 }
 
-export function addPost(title, body) {
+export function addPost(title, body, image) {
   return dispatch => {
-    const params = { title, body };
+    const token = localStorage.getItem('token') || null;
+    let data = new FormData();
+    data.append('post[title]', title);
+    data.append('post[body]', body);
+    if (image) { data.append('post[image]', image); }
+
     fetch(process.env.API_ENDPOINT + '/posts', {
       method: 'POST',
-      headers: headers(),
-      body: JSON.stringify(params)
+      headers: { Authorization: `Bearer ${token}`},
+      body: data
     })
       .then((response) => _handleErrors(response, dispatch))
       .then((response) => response.json() )
       .then((json) => { dispatch( postAdded(json) ) })
-      .catch((ex) => { console.log('request failed', ex)});
+      .catch((ex) => { console.log('request fa`iled', ex)});
   }
 }
 export function removePost(id) {
@@ -87,9 +112,10 @@ export function removePost(id) {
   }
 }
 
-function _handleErrors(response, dispatch){
+function _handleErrors(response){
   if (response.status == 401) {
-    // dispatch(logoutUser);
+    localStorage.removeItem('token');
+    localStorage.removeItem('session');
   }
   if (!response.ok) {
     throw Error(response);
