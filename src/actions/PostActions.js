@@ -97,7 +97,7 @@ export function addPost(title, body, image) {
       .then((response) => _handleErrors(response, dispatch))
       .then((response) => response.json() )
       .then((json) => { dispatch( postAdded(json) ) })
-      .catch((ex) => { console.log('request fa`iled', ex)});
+      .catch((ex) => { console.log('request failed', ex)});
   }
 }
 export function removePost(id) {

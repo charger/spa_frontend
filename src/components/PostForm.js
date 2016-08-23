@@ -16,8 +16,7 @@ class PostForm extends React.Component {
     let image = this.state.image;
     if (title === '' || body === '') return;
     this.props.onPostSubmit(title, body, image);
-    this.refs.title.value = '';
-    this.refs.body.value = '';
+    this.refs.postForm.reset();
     this.setState({image: null});
   }
 
