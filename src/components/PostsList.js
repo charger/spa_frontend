@@ -69,7 +69,7 @@ class PostList extends React.Component {
       });
 
       return (
-        <button className={btnClass} onClick={this._handleOrderClick.bind(this, field[1])} >{field[0]} {active ? arrow : null}</button>
+        <button key={field[0]} className={btnClass} onClick={this._handleOrderClick.bind(this, field[1])} >{field[0]} {active ? arrow : null}</button>
       );
     });
 
