@@ -38,17 +38,6 @@ class PostList extends React.Component {
     this.props.getPosts();
   }
 
-  _handlePostSubmit(){
-    const oldOrder = this.props.posts.order;
-    let newDirection = this.props.posts.order_direction;
-    if (oldOrder == newOrder) {
-      newDirection = (newDirection === 'asc') ? 'desc' : 'asc';
-    }
-
-    this.props.setPostOptions({order: newOrder, order_direction: newDirection});
-    this.props.getPosts();
-  }
-
   render() {
     const posts = this.props.posts.items;
     const filter = this.props.posts.filter;
