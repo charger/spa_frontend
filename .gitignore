@@ -39,3 +39,4 @@ jspm_packages
 .idea
 /public/assets/index.js
 /public/assets/bundle.css
+/public/messages/

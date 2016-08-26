@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {FormattedDate, FormattedMessage} from 'react-intl';
 
 class Post extends React.Component {
   render() {
@@ -15,8 +16,18 @@ class Post extends React.Component {
             <div>
               <img src={post.image.url} width="200px"/>
             </div>
+
+            <div>
+              <FormattedDate
+                value={post.created_at}
+                day="numeric"
+                month="long"
+                year="numeric" />
+            </div>
             <div className="m-t-3">
-              <Link to="/posts">Back</Link>
+              <Link to="/posts">
+                <FormattedMessage id="post.back" defaultMessage="back" />
+              </Link>
             </div>
           </div>
         </div>

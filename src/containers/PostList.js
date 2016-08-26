@@ -3,6 +3,7 @@ import PostsPage from '../components/PostsList.js';
 import {removePost, getPosts, addPost, setPostOptions}  from '../actions/PostActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { injectIntl } from 'react-intl'
 
 const mapStateToProps = (state) => {
   return { posts: state.posts }
@@ -15,4 +16,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostsPage);
+)(injectIntl(PostsPage));

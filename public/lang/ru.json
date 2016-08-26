@@ -1,0 +1,26 @@
+{
+  "post_list.page_title": "Посты",
+  "post_list.search": "Поиск",
+  "post_list.date": "Дата",
+  "post_list.title": "Заголовок",
+  "post_list.deletion_confirmation": "Вы уверены?",
+  "post_list.delete": "Удалить",
+
+  "post_form.title": "Заголовок",
+  "post_form.add_new_post": "Добавить новый пост",
+  "post_form.body": "Текст",
+  "post_form.image": "Картинка",
+  "post_form.post": "Запостить",
+  "post_form.drop_zone_text": "Файлы тянуть сюда",
+
+  "main_layout.home": "На главную",
+  "main_layout.posts": "Посты",
+  "main_layout.sign_out": "Выйти ({userName})",
+
+  "sign_in_form.page_title": "Вход в систему",
+  "sign_in_form.login": "Логин",
+  "sign_in_form.password": "Пароль",
+  "sign_in_form.sign_in_button": "Войти",
+
+  "post.back": "Назад"
+}

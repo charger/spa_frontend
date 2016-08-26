@@ -1,5 +1,5 @@
 import React from 'react';
-import PostForm from '../components/PostForm.js';
+import PostForm from '../containers/PostForm.js';
 import {Link} from 'react-router';
 import ReactPaginate from 'react-paginate';
 import classNames from 'classnames';
@@ -10,7 +10,8 @@ class PostList extends React.Component {
   }
 
   _handleRemove(id){
-    if (!confirm('Are you sure?')) {
+    const txt = this.props.intl.formatMessage({ id: 'post_list.deletion_confirmation', defaultMessage: 'Are you sure?' });
+    if (!confirm(txt)) {
       return
     }
     this.props.removePost(id);
@@ -41,10 +42,18 @@ class PostList extends React.Component {
   render() {
     const posts = this.props.posts.items;
     const filter = this.props.posts.filter;
+    const t = {
+      search: this.props.intl.formatMessage({ id: 'post_list.search', defaultMessage: 'Search' }),
+      title: this.props.intl.formatMessage({ id: 'post_list.title', defaultMessage: 'Title' }),
+      pageTitle: this.props.intl.formatMessage({ id: 'post_list.page_title', defaultMessage: 'Posts' }),
+      date: this.props.intl.formatMessage({ id: 'post_list.date', defaultMessage: 'Date' }),
+      delete: this.props.intl.formatMessage({ id: 'post_list.delete', defaultMessage: 'Delete' }),
+    };
+
     const postNodes = posts.map((post) => {
       return (
         <li key={post.id} className="list-group-item">
-          <button type="button" className="pull-sm-right btn btn-danger btn-sm" onClick={this._handleRemove.bind(this, post.id)}>Delete</button>
+          <button type="button" className="pull-sm-right btn btn-danger btn-sm" onClick={this._handleRemove.bind(this, post.id)}>{t.delete}</button>
           <strong>
             <Link to={`/posts/${post.id}`}>{post.title}</Link>
           </strong>
@@ -59,7 +68,7 @@ class PostList extends React.Component {
     });
 
     const arrow = this.props.posts.order_direction === 'asc' ? '\u2193' : '\u2191';
-    const orderButtons = [['Title', 'title'], ['Date', 'created_at']].map((field) => {
+    const orderButtons = [[t.title, 'title'], [t.date, 'created_at']].map((field) => {
       const order = this.props.posts.order;
       const active = field[1] === order;
       const btnClass = classNames({
@@ -73,12 +82,13 @@ class PostList extends React.Component {
       );
     });
 
-
     return(
       <div>
         <div className="row">
           <div className="col-sm-12">
-            <h2>Posts</h2>
+            <h2>
+              {t.pageTitle}
+            </h2>
 
             {/*pagination*/}
             <div className="row">
@@ -105,7 +115,7 @@ class PostList extends React.Component {
               {orderButtons}
             </div>
 
-            <div><input type="text" placeholder="Search" className="form-control" ref="filter" defaultValue={filter} onChange={this._handleFilterChange.bind(this)} /></div>
+            <div><input type="text" placeholder={t.search} className="form-control" ref="filter" defaultValue={filter} onChange={this._handleFilterChange.bind(this)} /></div>
 
             <ul className="list-group">
               {postNodes}
@@ -115,7 +125,7 @@ class PostList extends React.Component {
 
         <div className="row">
           <div className="col-sm-12">
-            <PostForm onPostSubmit={this.props.addPost}/>
+            <PostForm key="form" onPostSubmit={this.props.addPost}/>
           </div>
         </div>
       </div>
