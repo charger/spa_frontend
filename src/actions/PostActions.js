@@ -8,7 +8,7 @@ export const POST_OPTIONS = 'POST_OPTIONS';
 export function postAdded(post) {
   return {
     type: POST_ADD,
-    item: { id: post.id, title: post.title, body: post.body, image: post.image }
+    item: { id: post.id, title: post.title, body: post.body, image: post.image, created_at: Date.parse(post.created_at) }
   }
 }
 

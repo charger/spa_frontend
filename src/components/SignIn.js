@@ -10,26 +10,32 @@ class SignIn extends React.Component {
 
   render(){
     const errorMessage = this.props.errorMessage;
+    const t = {
+      pageTitle: this.props.intl.formatMessage({ id: 'sign_in_form.page_title', defaultMessage: 'Sign In' }),
+      login: this.props.intl.formatMessage({ id: 'sign_in_form.login', defaultMessage: 'Login' }),
+      password: this.props.intl.formatMessage({ id: 'sign_in_form.password', defaultMessage: 'Password' }),
+      signInButton: this.props.intl.formatMessage({ id: 'sign_in_form.sign_in_button', defaultMessage: 'Sign In' }),
+    };
 
     return (
       <div className="m-t-3">
         <div className="form-group row">
           <div className="col-sm-10">
-            <h2>Sign In</h2>
+            <h2>{t.pageTitle}</h2>
           </div>
         </div>
 
 
         <form onSubmit={this._submit.bind(this)} ref="postForm">
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Login</label>
+            <label className="col-sm-2 col-form-label">{t.login}</label>
             <div className="col-sm-10">
               <input type="text" ref="username" className="form-control"/>
             </div>
           </div>
 
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Password</label>
+            <label className="col-sm-2 col-form-label">{t.password}</label>
             <div className="col-sm-10">
               <input type="password" ref="password" className="form-control"/>
             </div>
@@ -45,7 +51,7 @@ class SignIn extends React.Component {
 
           <div className="form-group row">
             <div className="offset-sm-2 col-sm-10">
-              <input type="submit" value="Sign In" className="btn btn-primary" />
+              <input type="submit" value={t.signInButton} className="btn btn-primary" />
             </div>
           </div>
         </form>
